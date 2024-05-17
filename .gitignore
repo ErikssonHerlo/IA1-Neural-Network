@@ -1,0 +1,38 @@
+# Archivos y directorios generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales
+venv/
+env/
+myenv/
+my_env/
+*.env
+
+# Dependencias y paquetes instalados
+lib/
+lib64/
+bin/
+include/
+share/
+*.egg-info/
+.installed.cfg
+*.egg
+*.whl
+
+# Archivos de configuración local
+*.ini
+*.cfg
+*.conf
+*.env
+
+# Archivos de registro y salida
+*.log
+*.out
+
+# Archivos de caché
+*.swp
+*.swo
+*.DS_Store
