@@ -12,9 +12,11 @@ class NeuralNetwork:
         self.hidden_activation_derivative = self.get_activation_derivative(
             hidden_activation)
         self.output_activation = self.get_activation_function(
-            output_activation)
+            'sigmoid')  # Use sigmoid during training
         self.output_activation_derivative = self.get_activation_derivative(
-            output_activation)
+            'sigmoid')
+        self.output_final_activation = self.get_activation_function(
+            output_activation)  # Use specified function during final prediction
 
         # Inicializar pesos y biases
         self.weights = []
@@ -48,8 +50,6 @@ class NeuralNetwork:
             return tanh_activation.derivative
         elif name == 'relu':
             return lambda x: np.where(x > 0, 1, 0)
-        elif name == 'step':
-            return None
         else:
             return sigmoid_activation.derivative  # Default
 
@@ -69,14 +69,12 @@ class NeuralNetwork:
     def backpropagate(self, X, y, learning_rate):
         output = self.forward(X)
         error = y - output
-        if (self.output_activation_derivative != None):
-            deltas = [error * self.output_activation_derivative(output)]
-        else:
-            deltas = [error]
+        deltas = [error * self.output_activation_derivative(output)]
 
         for i in range(len(self.weights) - 2, -1, -1):
             deltas.append(deltas[-1].dot(self.weights[i + 1].T) *
                           self.hidden_activation_derivative(self.activations[i + 1]))
+
         deltas.reverse()
 
         for i in range(len(self.weights)):
@@ -100,6 +98,5 @@ class NeuralNetwork:
 
     def predict(self, X):
         raw_output = self.forward(X)
-        # step_output = (raw_output >= 0.5).astype(int)
-        # step_output = self.output_activation(raw_output)
-        return raw_output
+        step_output = self.output_final_activation(raw_output)
+        return step_output
