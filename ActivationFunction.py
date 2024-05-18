@@ -31,7 +31,7 @@ def identity(x):
 
 
 def identity_derivative(x):
-    return 1
+    return np.ones_like(x)
 
 
 def step(x):

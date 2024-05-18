@@ -50,6 +50,8 @@ class NeuralNetwork:
             return lambda x: np.where(x > 0, 1, 0)
         elif name == 'step':
             return None
+        elif name == 'identity':
+            return identity_activation.derivative
         else:
             return sigmoid_activation.derivative  # Default
 
