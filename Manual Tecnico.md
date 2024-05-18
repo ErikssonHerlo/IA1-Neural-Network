@@ -1,32 +1,41 @@
-# Implementación de Red Neuronal
+# Neural Network - Technical Guide
 
-Este proyecto implementa una red neuronal capaz de aprender operaciones lógicas como AND, OR y XOR. La red neuronal es configurable en términos de tamaño de entrada, tamaño de salida, capas ocultas y funciones de activación.
+## Descripción
+
+Neural Network es una red neuronal de múltiples capas internas creada desde cero, sin el uso de librerías externas. Esta red es capaz de aprender y adaptarse a través de la experiencia, lo que la hace ideal para una variedad de tareas de aprendizaje automático.
 
 ## Tabla de Contenidos
 
 1. [Introducción](#introducción)
-2. [Funciones de Activación](#funciones-de-activación)
+2. [Características](#características)
+3. [Funciones de Activación](#funciones-de-activación)
    - [Sigmoide](#sigmoide)
    - [Tanh](#tanh)
    - [ReLU](#relu)
    - [Leaky ReLU](#leaky-relu)
    - [Step](#step)
-3. [Clase Red Neuronal](#clase-red-neuronal)
+4. [Clase Red Neuronal](#clase-red-neuronal)
    - [Inicialización](#inicialización)
    - [Propagación Hacia Adelante](#propagación-hacia-adelante)
    - [Propagación Hacia Atrás](#propagación-hacia-atrás)
    - [Entrenamiento](#entrenamiento)
    - [Predicción](#predicción)
-4. [Funciones de Normalización y Desnormalización](#funciones-de-normalización-y-desnormalización)
-5. [Combinaciones Recomendadas](#combinaciones-recomendadas)
+5. [Funciones de Normalización y Desnormalización](#funciones-de-normalización-y-desnormalización)
+6. [Combinaciones Recomendadas](#combinaciones-recomendadas)
    - [Capas Ocultas](#capas-ocultas)
    - [Capas de Salida](#capas-de-salida)
-6. [Configuración de Ejemplo](#configuración-de-ejemplo)
-7. [Uso](#uso)
+7. [Configuración de Ejemplo](#configuración-de-ejemplo)
+8. [Resultado Esperado](#resultado-esperado)
 
 ## Introducción
 
 Este proyecto permite crear, entrenar y probar una red neuronal para operaciones lógicas simples. Puedes configurar el número de entradas, salidas, capas ocultas y elegir entre varias funciones de activación.
+
+## Características
+
+- Múltiples capas internas: Neural Network tiene la capacidad de tener múltiples capas internas, lo que permite una mayor complejidad y precisión en la toma de decisiones.
+- Aprendizaje supervisado: Neural Network utiliza un enfoque de aprendizaje supervisado, lo que significa que puede aprender de los datos de entrada y salida proporcionados.
+- Funciones de activación básicas: Neural Network implementa funciones de activación básicas como la función sigmoide y la función de paso unitario.
 
 ## Funciones de Activación
 
@@ -326,40 +335,29 @@ Ingrese la matriz de características de entrenamiento (X) en formato de lista d
 Ingrese la matriz de resultados esperados (y) en formato de lista de listas: [[0], [0], [0], [1]]
 ```
 
-## Uso
+## Resultado Esperado
 
-```python
-from NeuralNetwork import NeuralNetwork
-import numpy as np
+Después de seguir estos pasos, deberías obtener los siguientes resultados para la operación lógica AND:
 
-def main():
-    print("Bienvenido al configurador de Redes Neuronales!")
-    input_size = int(input("Ingrese el número de entradas: "))
-    output_size = int(input("Ingrese el número de salidas: "))
-    hidden_layers = list(map(int, input("Ingrese el número de neuronas en cada capa oculta, separadas por comas: ").split(',')))
-    hidden_activation = input("Ingrese la función de activación para las capas ocultas (sigmoid/tanh): ").lower() or 'sigmoid'
-    output_activation = input("Ingrese la función de activación para la capa de salida (sigmoid/identity/step): ").lower() or 'sigmoid'
-    epochs = int(input("Ingrese el número de épocas para el entrenamiento: 1000"))
-    learning_rate = float(input("Ingrese la tasa de aprendizaje: 0.1"))
-
-    X = np.array(eval(input("Ingrese la matriz de características de entrenamiento (X) en formato de lista de listas: ")))
-    y = np.array(eval(input("Ingrese la matriz de resultados esperados (y) en formato de lista de listas: ")))
-
-    nn = NeuralNetwork(input_size, output_size, hidden_layers, hidden_activation, output_activation)
-    nn.train(X, y, epochs, learning_rate)
-
-    print("Entrenamiento completado. Realizando predicciones con los mismos datos de entrenamiento.")
-    predictions = nn.predict(X)
-
-    print("\nEntradas y Predicciones:")
-    for i in range(len(X)):
-        print(f"Entrada: {X[i]}, Predicción: {predictions[i]}")
-
-if __name__ == "__main__":
-    main()
 ```
+Configuración de la Red Neuronal para la Operación Lógica AND
+Epoch 0, Loss: 0.2499
+Predicciones (entrenamiento):
+Entrada: [0 0], Predicción: [0]
+Entrada: [0 1], Predicción: [0]
+Entrada: [1 0], Predicción: [0]
+Entrada: [1 1], Predicción: [1]
+...
+
+Entrenamiento completado. Realizando predicciones con los mismos datos de entrenamiento.
+
+Entradas y Predicciones:
+Entrada: [0 0], Predicción: [0]
+Entrada: [0 1], Predicción: [0]
+Entrada: [1 0], Predicción: [0]
+Entrada: [1 1], Predicción: [1]
+```
+
+Estos resultados muestran que la red neuronal ha aprendido correctamente la operación lógica AND, produciendo las salidas esperadas para cada par de entradas binarias.
 
 Este README proporciona una explicación detallada del funcionamiento de cada parte de la clase `NeuralNetwork`, incluyendo la inicialización, propagación hacia adelante, propagación hacia atrás, entrenamiento y predicción. Además, se ofrecen recomendaciones para las combinaciones de funciones de activación en capas ocultas y de salida, junto con un ejemplo de configuración y uso del código.
-```
-
-
